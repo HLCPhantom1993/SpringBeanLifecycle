@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 构造客户bean -->
+	<bean name="customer" class="com.honglin_chen.spring_bean_lifecycle.bean.Customer">
+		<!-- 为customer bean匹配其实例变量name并设置初始值 -->
+		<property name="name" value="Christopher" />
+	</bean>
+	
+	<!-- 为customer method接口构造bean 通过bean构造init-method和destroy-method -->
+	<bean name="customerServiceCustomMethod" init-method="customInitBean" 
+		destroy-method="customDestroyBean"
+		class="com.honglin_chen.spring_bean_lifecycle.service.CustomerServiceImpCustomMethod">
+		<!-- Reference Injection -->
+		<!-- 对于当前bean, 我们建立bean为customer的reference依赖 -->
+		<property name="customer" ref="customer" />
+	</bean>
+	
+	<!-- 创建自带bean的注解bean post处理器 -->
+	<bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />	
+</beans>

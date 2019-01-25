@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean name="customer" class="com.honglin_chen.spring_bean_lifecycle.bean.Customer">
+		<property name="name" value="Christopher" />
+	</bean>
+	
+	<!-- 给接口创建bean -->
+	<bean name="customerServiceAware" class="com.honglin_chen.spring_bean_lifecycle.service.CustomerServiceImpAwareInterface">
+		<property name="customer" ref="customer" />
+		<property name="beanNames">
+			<!-- 声明beanNames的数据类型 -->
+			<array value-type="java.lang.String">
+				<!-- mock三个数据, 其中两个为已经建立的bean, 另一个为假的bean -->
+				<value>customerServiceAware</value>
+				<value>customer</value>
+				<value>dummyBean</value>
+			</array>
+		</property>
+	</bean>
+</beans>
